@@ -17,7 +17,9 @@ namespace mastermind
             couleurRandom(out int[] programColorsArray);oix");
             string playerColors = Console.ReadLine();
             playerColorToArray(playerColors, out int[] playerColorsArray);
-            tableauComparatif(programColorsArray, out int[] programColorsArray_)
+            tableauComparatif(programColorsArray, out int[] programColorsArray_);
+            calculePionRouge(programColorsArray_, playerColorsArray, out pionRouge);
+            calculePionBlanc(programColorsArray_, playerColorsArray, out pionBlanc);
 
         }
 
@@ -63,7 +65,7 @@ namespace mastermind
                 {
                     programColorsArray_[i] = -1;
                     playerColorsArray[i] = -2;
-                    pionRouge++ 
+                    pionRouge++;
                 }
 
             }
@@ -75,7 +77,14 @@ namespace mastermind
             pionBlanc = 0;
             for (int i = 0; i <= 3; i++)
             {
-
+                for (int j = 0; j <= 3; j++)
+                {
+                    if (programColorsArray_[i] == playerColorsArray[j])
+                    {
+                        playerColorsArray[i] = -2;
+                        pionBlanc++;
+                    }
+                }
             }
 
         }
@@ -89,5 +98,6 @@ namespace mastermind
                 programColorsArray_[i] = programColorsArray[i];
             }
         }
+        
     }
 }
