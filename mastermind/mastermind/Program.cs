@@ -10,28 +10,56 @@ namespace mastermind
     {
         static void Main(string[] args)
         {
+            
             int pionRouge = 0;
             int pionBlanc = 0;
-                      
-            Console.WriteLine("Entrez la couleur de votre ch
-            couleurRandom(out int[] programColorsArray);oix");
-            string playerColors = Console.ReadLine();
-            playerColorToArray(playerColors, out int[] playerColorsArray);
-            tableauComparatif(programColorsArray, out int[] programColorsArray_);
-            calculePionRouge(programColorsArray_, playerColorsArray, out pionRouge);
-            calculePionBlanc(programColorsArray_, playerColorsArray, out pionBlanc);
+            int manche = 1;
 
+            couleurRandom(out int[] programColorsArray);
+
+            while (pionRouge != 4 && manche <= 12)
+            {
+                Console.WriteLine("Entrez la couleur de votre choix");
+                string playerColors = Console.ReadLine();
+                //Fonction qui met les couleurs du joueur vers un tableau
+                playerColorToArray(playerColors, out int[] playerColorsArray);
+                //Fonction qui créé un tableau comparatif
+                tableauComparatif(programColorsArray, out int[] programColorsArray_);
+                //Fonction qui calcule le nombre de pion rouge
+                calculePionRouge(programColorsArray_, playerColorsArray, out pionRouge);
+                //Fonction qui calcule ne nombre de pion blanc
+                calculePionBlanc(programColorsArray_, playerColorsArray, out pionBlanc);
+
+                Console.WriteLine($"pion rouge: {pionRouge}");
+                Console.WriteLine($"pion blanc: {pionBlanc}");
+
+                //Vérification piont rouge + manche
+                if (pionRouge == 4)
+                {
+                    Console.WriteLine("Bien joué vous avez gagné !");
+                    Console.ReadLine();
+                }
+                else
+                {
+                    manche++;
+                    if (manche > 12)
+                    {
+                        Console.WriteLine("Vous avez perdu !");
+                        Console.ReadLine();
+                    }
+                }
+            }
         }
 
         //genere des couleurs aux hasards
         static void couleurRandom(out int[] programColorsArray)
         {
-            combi = new int[4];
+            programColorsArray = new int[4];
             for (int i = 0; i <= 3; i++)
             {
                 Random rnd = new Random();
                 //int valeur = rnd.Next(1, 7);
-                combi[i] = rnd.Next(1, 7);
+                programColorsArray[i] = rnd.Next(1, 7);
 
             }
         }
@@ -45,7 +73,7 @@ namespace mastermind
             Console.ReadLine();
         }*/
 
-
+        //Reponse du joueur vers un tableau
         static void playerColorToArray(string reponseColors, out int[] playerColorsArray)
         {
             playerColorsArray = new int[4];
@@ -86,7 +114,6 @@ namespace mastermind
                     }
                 }
             }
-
         }
 
         //tableau comparatif qui ajoute de dans.
@@ -98,6 +125,6 @@ namespace mastermind
                 programColorsArray_[i] = programColorsArray[i];
             }
         }
-        
+
     }
 }
